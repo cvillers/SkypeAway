@@ -1,0 +1,38 @@
+﻿<Window x:Class="SkypeAway.TestWindow"
+		xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+		xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+		xmlns:sa="clr-namespace:SkypeAway"
+		Title="SkypeAway Test" Height="350" Width="250"
+		Icon="/Icons/WindowsForm_817.ico"
+		ResizeMode="NoResize">
+	
+	<Window.CommandBindings>
+		<CommandBinding Command="{x:Static Member=sa:TestWindow.StatusCommand}" Executed="StatusCommand_Executed" />
+	</Window.CommandBindings>
+	
+	<Grid Margin="3,7,3,7">
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto" />
+			<RowDefinition Height="Auto" />
+			<RowDefinition Height="Auto" />
+			<RowDefinition Height="Auto" />
+			<RowDefinition Height="Auto" />
+		</Grid.RowDefinitions>
+
+		<Button Grid.Row="0" Margin="3,7,3,7" Command="{x:Static Member=sa:TestWindow.StatusCommand}" CommandParameter="Online">
+			Online
+		</Button>
+		<Button Grid.Row="1" Margin="3,7,3,7" Command="{x:Static Member=sa:TestWindow.StatusCommand}" CommandParameter="Away">
+			Away
+		</Button>
+		<Button Grid.Row="2" Margin="3,7,3,7" Command="{x:Static Member=sa:TestWindow.StatusCommand}" CommandParameter="DND">
+			Do not disturb
+		</Button>
+		<Button Grid.Row="3" Margin="3,7,3,7" Command="{x:Static Member=sa:TestWindow.StatusCommand}" CommandParameter="Invisible">
+			Invisible
+		</Button>
+		<Button Grid.Row="4" Margin="3,7,3,7" Command="{x:Static Member=sa:TestWindow.StatusCommand}" CommandParameter="Offline">
+			Offline
+		</Button>
+	</Grid>
+</Window>

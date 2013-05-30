@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -22,11 +23,11 @@ namespace SkypeAway
 	/// <summary>
 	/// Interaction logic for MainWindow.xaml
 	/// </summary>
-	public partial class MainWindow : Window
+	public partial class TestWindow : Window
 	{
 		public static RoutedCommand StatusCommand = new RoutedCommand();
 
-		public MainWindow()
+		public TestWindow()
 		{
 			InitializeComponent();
 		}
@@ -48,16 +49,23 @@ namespace SkypeAway
 			IntPtr myselfControl = NativeMethods.FindWindowEx(root, IntPtr.Zero, "TMyselfControl", null);
 
 			NativeMethods.PostMessage(myselfControl, NativeConstants.WM_LBUTTONDOWN, (IntPtr)NativeConstants.MK_LBUTTON, NativeMethods.MAKELPARAM(16, 16));
+			//Thread.Sleep(50);
+			
 			NativeMethods.PostMessage(myselfControl, NativeConstants.WM_LBUTTONUP, IntPtr.Zero, NativeMethods.MAKELPARAM(16, 16));
+			Thread.Sleep(50);
 
 			for(int i = 0; i <= DownKeyCounts[e.Parameter.ToString()]; i++)
 			{
 				NativeMethods.PostMessage(myselfControl, NativeConstants.WM_KEYDOWN, (IntPtr)NativeConstants.VK_DOWN, BuildKeyLParam(NativeConstants.WM_KEYDOWN, 0, 50, true, false));
+				Thread.Sleep(50);
 				NativeMethods.PostMessage(myselfControl, NativeConstants.WM_KEYUP, (IntPtr)NativeConstants.VK_DOWN, BuildKeyLParam(NativeConstants.WM_KEYUP, 0, 50, true, true));
 			}
 
+			Thread.Sleep(50);
 			NativeMethods.PostMessage(myselfControl, NativeConstants.WM_KEYDOWN, (IntPtr)NativeConstants.VK_RETURN, BuildKeyLParam(NativeConstants.WM_KEYDOWN, 0, 0x1c, true, false));
+			//Thread.Sleep(50);
 			NativeMethods.PostMessage(myselfControl, NativeConstants.WM_KEYUP, (IntPtr)NativeConstants.VK_RETURN, BuildKeyLParam(NativeConstants.WM_KEYUP, 0, 0x1c, true, true));
+			Thread.Sleep(50);
 		}
 
 		private IntPtr BuildKeyLParam(uint message, int repeat, int scanCode, bool extended, bool previousDown)

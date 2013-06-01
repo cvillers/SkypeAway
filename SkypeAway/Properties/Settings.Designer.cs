@@ -22,5 +22,101 @@ namespace SkypeAway.Properties {
                 return defaultInstance;
             }
         }
+        
+        /// <summary>
+        /// Should something happen when the session is locked?
+        /// </summary>
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Configuration.SettingsDescriptionAttribute("Should something happen when the session is locked?")]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool ActivateOnLock {
+            get {
+                return ((bool)(this["ActivateOnLock"]));
+            }
+            set {
+                this["ActivateOnLock"] = value;
+            }
+        }
+        
+        /// <summary>
+        /// Should something happen when the session is unlocked?
+        /// </summary>
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Configuration.SettingsDescriptionAttribute("Should something happen when the session is unlocked?")]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool ActivateOnUnlock {
+            get {
+                return ((bool)(this["ActivateOnUnlock"]));
+            }
+            set {
+                this["ActivateOnUnlock"] = value;
+            }
+        }
+        
+        /// <summary>
+        /// Should something happen when a remote desktop session connects?
+        /// </summary>
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Configuration.SettingsDescriptionAttribute("Should something happen when a remote desktop session connects?")]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool ActivateOnRdDisconnect {
+            get {
+                return ((bool)(this["ActivateOnRdDisconnect"]));
+            }
+            set {
+                this["ActivateOnRdDisconnect"] = value;
+            }
+        }
+        
+        /// <summary>
+        /// Should something happen when a remote desktop session disconnects?
+        /// </summary>
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Configuration.SettingsDescriptionAttribute("Should something happen when a remote desktop session disconnects?")]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool ActivateOnRdConnect {
+            get {
+                return ((bool)(this["ActivateOnRdConnect"]));
+            }
+            set {
+                this["ActivateOnRdConnect"] = value;
+            }
+        }
+        
+        /// <summary>
+        /// Action to take on a lock or disconnect event.
+        /// </summary>
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Configuration.SettingsDescriptionAttribute("Action to take on a lock or disconnect event.")]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Away")]
+        public string OnLockAction {
+            get {
+                return ((string)(this["OnLockAction"]));
+            }
+            set {
+                this["OnLockAction"] = value;
+            }
+        }
+        
+        /// <summary>
+        /// Action to take on an unlock or connect event.
+        /// </summary>
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Configuration.SettingsDescriptionAttribute("Action to take on an unlock or connect event.")]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Online")]
+        public string OnUnlockAction {
+            get {
+                return ((string)(this["OnUnlockAction"]));
+            }
+            set {
+                this["OnUnlockAction"] = value;
+            }
+        }
     }
 }

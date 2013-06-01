@@ -11,25 +11,10 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
+using Microsoft.Win32;
+
 namespace SkypeAway
 {
-	/*public class TestCommand : ICommand
-	{
-		public bool CanExecute(object parameter)
-		{
-			return true;
-		}
-
-		public event EventHandler CanExecuteChanged;
-
-		public void Execute(object parameter)
-		{
-			var window = new TestWindow();
-
-			window.Show();
-		}
-	}*/
-
 	/// <summary>
 	/// Interaction logic for TrayWindow.xaml
 	/// </summary>
@@ -43,6 +28,64 @@ namespace SkypeAway
 				{
 					TaskbarIcon.Dispose();
 				});
+
+			SystemEvents.SessionSwitch += SystemEvents_SessionSwitch;
+		}
+
+		/// <summary>
+		/// Handler for the session status switch event.
+		/// </summary>
+		/// <param name="sender">Sending object.</param>
+		/// <param name="e">The event.</param>
+		void SystemEvents_SessionSwitch(object sender, SessionSwitchEventArgs e)
+		{
+			switch(e.Reason)
+			{
+				case SessionSwitchReason.SessionLock:
+				{
+					if(Properties.Settings.Default.ActivateOnLock)
+					{
+						Status newStatus = (Status)Enum.Parse(typeof(Status), Properties.Settings.Default.OnLockAction);
+
+						Skype.ChangeStatus(newStatus);
+					}
+
+					break;
+				}
+				case SessionSwitchReason.SessionUnlock:
+				{
+					if(Properties.Settings.Default.ActivateOnUnlock)
+					{
+						Status newStatus = (Status)Enum.Parse(typeof(Status), Properties.Settings.Default.OnUnlockAction);
+
+						Skype.ChangeStatus(newStatus);
+					}
+
+					break;
+				}
+				case SessionSwitchReason.RemoteConnect:
+				{
+					if(Properties.Settings.Default.ActivateOnRdConnect)
+					{
+						Status newStatus = (Status)Enum.Parse(typeof(Status), Properties.Settings.Default.OnUnlockAction);
+
+						Skype.ChangeStatus(newStatus);
+					}
+
+					break;
+				}
+				case SessionSwitchReason.RemoteDisconnect:
+				{
+					if(Properties.Settings.Default.ActivateOnRdDisconnect)
+					{
+						Status newStatus = (Status)Enum.Parse(typeof(Status), Properties.Settings.Default.OnLockAction);
+
+						Skype.ChangeStatus(newStatus);
+					}
+
+					break;
+				}
+			}
 		}
 
 		public static RoutedCommand TestCommand = new RoutedCommand();

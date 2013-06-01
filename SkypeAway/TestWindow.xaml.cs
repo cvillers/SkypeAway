@@ -32,63 +32,11 @@ namespace SkypeAway
 			InitializeComponent();
 		}
 
-		private static readonly Dictionary<string, int> DownKeyCounts = new Dictionary<string,int>
+		public void StatusCommand_Executed(object sender, ExecutedRoutedEventArgs e)
 		{
-			{ "Online", 1 },
-			{ "Away", 2 },
-			{ "DND", 3 },
-			{ "Invisible", 4 },
-			{ "Offline", 5 },
-		};
+			Status newStatus = (Status)Enum.Parse(typeof(Status), e.Parameter.ToString());
 
-		private void StatusCommand_Executed(object sender, ExecutedRoutedEventArgs e)
-		{
-			//MessageBox.Show("Selected " + e.Parameter.ToString());
-
-			IntPtr root = NativeMethods.FindWindow("tSkMainForm", null);
-			IntPtr myselfControl = NativeMethods.FindWindowEx(root, IntPtr.Zero, "TMyselfControl", null);
-
-			NativeMethods.PostMessage(myselfControl, NativeConstants.WM_LBUTTONDOWN, (IntPtr)NativeConstants.MK_LBUTTON, NativeMethods.MAKELPARAM(16, 16));
-			//Thread.Sleep(50);
-			
-			NativeMethods.PostMessage(myselfControl, NativeConstants.WM_LBUTTONUP, IntPtr.Zero, NativeMethods.MAKELPARAM(16, 16));
-			Thread.Sleep(50);
-
-			for(int i = 0; i <= DownKeyCounts[e.Parameter.ToString()]; i++)
-			{
-				NativeMethods.PostMessage(myselfControl, NativeConstants.WM_KEYDOWN, (IntPtr)NativeConstants.VK_DOWN, BuildKeyLParam(NativeConstants.WM_KEYDOWN, 0, 50, true, false));
-				Thread.Sleep(50);
-				NativeMethods.PostMessage(myselfControl, NativeConstants.WM_KEYUP, (IntPtr)NativeConstants.VK_DOWN, BuildKeyLParam(NativeConstants.WM_KEYUP, 0, 50, true, true));
-			}
-
-			Thread.Sleep(50);
-			NativeMethods.PostMessage(myselfControl, NativeConstants.WM_KEYDOWN, (IntPtr)NativeConstants.VK_RETURN, BuildKeyLParam(NativeConstants.WM_KEYDOWN, 0, 0x1c, true, false));
-			//Thread.Sleep(50);
-			NativeMethods.PostMessage(myselfControl, NativeConstants.WM_KEYUP, (IntPtr)NativeConstants.VK_RETURN, BuildKeyLParam(NativeConstants.WM_KEYUP, 0, 0x1c, true, true));
-			Thread.Sleep(50);
-		}
-
-		private IntPtr BuildKeyLParam(uint message, int repeat, int scanCode, bool extended, bool previousDown)
-		{
-			BitVector32 vec = new BitVector32(0);
-
-			BitVector32.Section sec1 = BitVector32.CreateSection(15);
-			BitVector32.Section sec2 = BitVector32.CreateSection(8);
-			BitVector32.Section sec3 = BitVector32.CreateSection(1);
-			BitVector32.Section sec4 = BitVector32.CreateSection(4);
-			BitVector32.Section sec5 = BitVector32.CreateSection(1);
-			BitVector32.Section sec6 = BitVector32.CreateSection(1);
-			BitVector32.Section sec7 = BitVector32.CreateSection(1);
-
-			vec[sec1] = repeat;
-			vec[sec2] = scanCode;
-			vec[sec3] = extended ? 1 : 0;
-			vec[sec4] = 0;
-			vec[sec5] = 0;
-			vec[sec6] = message == NativeConstants.WM_KEYUP ? 1 : previousDown ? 1 : 0;
-			vec[sec7] = message == NativeConstants.WM_KEYDOWN ? 0 : 1;
-
-			return (IntPtr)vec.Data;
+			Skype.ChangeStatus(newStatus);
 		}
 	}
 }

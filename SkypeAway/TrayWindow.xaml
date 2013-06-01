@@ -21,7 +21,7 @@
 				<ContextMenu>
 					<!-- Using Click is bad form, but it's functional -->
 					<MenuItem Header="Test" Click="TestCommand_Executed" />
-					<MenuItem Header="Settings" />
+					<MenuItem Header="Settings" Click="SettingsCommand_Executed" />
 					<Separator />
 					<MenuItem Header="Quit" Click="QuitCommand_Executed" />
 				</ContextMenu>

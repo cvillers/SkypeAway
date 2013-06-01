@@ -94,12 +94,12 @@ namespace SkypeAway.Properties {
         [global::System.Configuration.SettingsDescriptionAttribute("Action to take on a lock or disconnect event.")]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("Away")]
-        public string OnLockAction {
+        public global::SkypeAway.Status LockAction {
             get {
-                return ((string)(this["OnLockAction"]));
+                return ((global::SkypeAway.Status)(this["LockAction"]));
             }
             set {
-                this["OnLockAction"] = value;
+                this["LockAction"] = value;
             }
         }
         
@@ -110,12 +110,36 @@ namespace SkypeAway.Properties {
         [global::System.Configuration.SettingsDescriptionAttribute("Action to take on an unlock or connect event.")]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("Online")]
-        public string OnUnlockAction {
+        public global::SkypeAway.Status UnlockAction {
             get {
-                return ((string)(this["OnUnlockAction"]));
+                return ((global::SkypeAway.Status)(this["UnlockAction"]));
             }
             set {
-                this["OnUnlockAction"] = value;
+                this["UnlockAction"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Away")]
+        public global::SkypeAway.Status RdDisconnectAction {
+            get {
+                return ((global::SkypeAway.Status)(this["RdDisconnectAction"]));
+            }
+            set {
+                this["RdDisconnectAction"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Online")]
+        public global::SkypeAway.Status RdConnectAction {
+            get {
+                return ((global::SkypeAway.Status)(this["RdConnectAction"]));
+            }
+            set {
+                this["RdConnectAction"] = value;
             }
         }
     }

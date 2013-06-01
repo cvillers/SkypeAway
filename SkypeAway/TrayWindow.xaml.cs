@@ -45,9 +45,7 @@ namespace SkypeAway
 				{
 					if(Properties.Settings.Default.ActivateOnLock)
 					{
-						Status newStatus = (Status)Enum.Parse(typeof(Status), Properties.Settings.Default.OnLockAction);
-
-						Skype.ChangeStatus(newStatus);
+						Skype.ChangeStatus(Properties.Settings.Default.LockAction);
 					}
 
 					break;
@@ -56,9 +54,7 @@ namespace SkypeAway
 				{
 					if(Properties.Settings.Default.ActivateOnUnlock)
 					{
-						Status newStatus = (Status)Enum.Parse(typeof(Status), Properties.Settings.Default.OnUnlockAction);
-
-						Skype.ChangeStatus(newStatus);
+						Skype.ChangeStatus(Properties.Settings.Default.UnlockAction);
 					}
 
 					break;
@@ -67,9 +63,7 @@ namespace SkypeAway
 				{
 					if(Properties.Settings.Default.ActivateOnRdConnect)
 					{
-						Status newStatus = (Status)Enum.Parse(typeof(Status), Properties.Settings.Default.OnUnlockAction);
-
-						Skype.ChangeStatus(newStatus);
+						Skype.ChangeStatus(Properties.Settings.Default.RdConnectAction);
 					}
 
 					break;
@@ -78,9 +72,7 @@ namespace SkypeAway
 				{
 					if(Properties.Settings.Default.ActivateOnRdDisconnect)
 					{
-						Status newStatus = (Status)Enum.Parse(typeof(Status), Properties.Settings.Default.OnLockAction);
-
-						Skype.ChangeStatus(newStatus);
+						Skype.ChangeStatus(Properties.Settings.Default.RdDisconnectAction);
 					}
 
 					break;
@@ -93,6 +85,15 @@ namespace SkypeAway
 		private void TestCommand_Executed(object sender, RoutedEventArgs e)
 		{
 			var window = new TestWindow();
+
+			window.Show();
+		}
+
+		public static RoutedCommand SettingsCommand = new RoutedCommand();
+
+		private void SettingsCommand_Executed(object sender, RoutedEventArgs e)
+		{
+			var window = new SettingsWindow();
 
 			window.Show();
 		}

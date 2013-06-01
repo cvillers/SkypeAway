@@ -14,10 +14,16 @@
     <Setting Name="ActivateOnRdConnect" Description="Should something happen when a remote desktop session disconnects?" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
-    <Setting Name="OnLockAction" Description="Action to take on a lock or disconnect event." Type="System.String" Scope="User">
+    <Setting Name="LockAction" Description="Action to take on a lock or disconnect event." Type="SkypeAway.Status" Scope="User">
       <Value Profile="(Default)">Away</Value>
     </Setting>
-    <Setting Name="OnUnlockAction" Description="Action to take on an unlock or connect event." Type="System.String" Scope="User">
+    <Setting Name="UnlockAction" Description="Action to take on an unlock or connect event." Type="SkypeAway.Status" Scope="User">
+      <Value Profile="(Default)">Online</Value>
+    </Setting>
+    <Setting Name="RdDisconnectAction" Type="SkypeAway.Status" Scope="User">
+      <Value Profile="(Default)">Away</Value>
+    </Setting>
+    <Setting Name="RdConnectAction" Type="SkypeAway.Status" Scope="User">
       <Value Profile="(Default)">Online</Value>
     </Setting>
   </Settings>

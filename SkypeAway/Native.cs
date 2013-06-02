@@ -6,6 +6,9 @@ using System.Text;
 
 namespace SkypeAway.Native
 {
+	/// <summary>
+	/// Contains constants used for function definitions in <see cref="T:SkypeAway.Native.NativeMethods" />.
+	/// </summary>
 	public static class NativeConstants
 	{
 		public static readonly uint MK_LBUTTON = 0x0001;

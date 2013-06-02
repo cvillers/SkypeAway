@@ -13,6 +13,8 @@ using System.Windows.Shapes;
 
 using Microsoft.Win32;
 
+using log4net;
+
 namespace SkypeAway
 {
 	/// <summary>
@@ -20,12 +22,17 @@ namespace SkypeAway
 	/// </summary>
 	public partial class TrayWindow : Window
 	{
+		private static ILog log = LogManager.GetLogger(typeof(TrayWindow));
+
 		public TrayWindow()
 		{
+			log.Debug("Starting up");
+
 			InitializeComponent();
 
 			Application.Current.Exit += new ExitEventHandler((sender, ev) =>
 				{
+					log.Debug("Shutting down");
 					TaskbarIcon.Dispose();
 				});
 
@@ -45,6 +52,7 @@ namespace SkypeAway
 				{
 					if(Properties.Settings.Default.ActivateOnLock)
 					{
+						log.DebugFormat("ActivateOnLock: Changing status to {0}", Properties.Settings.Default.LockAction);
 						Skype.ChangeStatus(Properties.Settings.Default.LockAction);
 					}
 
@@ -54,6 +62,7 @@ namespace SkypeAway
 				{
 					if(Properties.Settings.Default.ActivateOnUnlock)
 					{
+						log.DebugFormat("ActivateOnUnlock: Changing status to {0}", Properties.Settings.Default.UnlockAction);
 						Skype.ChangeStatus(Properties.Settings.Default.UnlockAction);
 					}
 
@@ -63,6 +72,7 @@ namespace SkypeAway
 				{
 					if(Properties.Settings.Default.ActivateOnRdConnect)
 					{
+						log.DebugFormat("ActivateOnRdConnect: Changing status to {0}", Properties.Settings.Default.RdConnectAction);
 						Skype.ChangeStatus(Properties.Settings.Default.RdConnectAction);
 					}
 
@@ -72,6 +82,7 @@ namespace SkypeAway
 				{
 					if(Properties.Settings.Default.ActivateOnRdDisconnect)
 					{
+						log.DebugFormat("ActivateOnRdDisconnect: Changing status to {0}", Properties.Settings.Default.RdDisconnectAction);
 						Skype.ChangeStatus(Properties.Settings.Default.RdDisconnectAction);
 					}
 
@@ -82,20 +93,26 @@ namespace SkypeAway
 
 		public static RoutedCommand TestCommand = new RoutedCommand();
 
+		private TestWindow testWindow;
+
 		private void TestCommand_Executed(object sender, RoutedEventArgs e)
 		{
-			var window = new TestWindow();
+			if(testWindow == null)
+				testWindow = new TestWindow();
 
-			window.Show();
+			testWindow.Show();
 		}
 
 		public static RoutedCommand SettingsCommand = new RoutedCommand();
 
+		private SettingsWindow settingsWindow;
+
 		private void SettingsCommand_Executed(object sender, RoutedEventArgs e)
 		{
-			var window = new SettingsWindow();
+			if(settingsWindow == null)
+				settingsWindow = new SettingsWindow();
 
-			window.Show();
+			settingsWindow.Show();
 		}
 
 		public static RoutedCommand QuitCommand = new RoutedCommand();

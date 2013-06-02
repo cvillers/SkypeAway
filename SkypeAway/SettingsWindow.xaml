@@ -1,0 +1,77 @@
+﻿<Window x:Class="SkypeAway.SettingsWindow"
+		xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+		xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+		xmlns:sa="clr-namespace:SkypeAway"
+		xmlns:properties="clr-namespace:SkypeAway.Properties"
+		Title="Settings" Height="240" Width="400" MinHeight="240" MinWidth="400">
+	
+	<Window.CommandBindings>
+		<CommandBinding Command="{x:Static Member=sa:SettingsWindow.OkCommand}" Executed="OkCommand_Executed" />
+		<CommandBinding Command="{x:Static Member=sa:SettingsWindow.CancelCommand}" Executed="CancelCommand_Executed" />				
+	</Window.CommandBindings>
+	
+	<Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto" />
+			<RowDefinition Height="Auto" />
+			<RowDefinition Height="Auto" />
+		</Grid.RowDefinitions>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="*" />
+			<ColumnDefinition Width="Auto" />
+		</Grid.ColumnDefinitions>
+		
+		<GroupBox Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="0" Header="Local" VerticalAlignment="Stretch">
+			<Grid>
+				<Grid.RowDefinitions>
+					<RowDefinition Height="Auto" />
+					<RowDefinition Height="Auto" />
+				</Grid.RowDefinitions>
+				
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="*" />
+					<ColumnDefinition Width="*" />
+				</Grid.ColumnDefinitions>
+
+				<CheckBox Grid.Column="0" Grid.Row="0" Content="Workstation lock" Margin="5" IsChecked="{Binding Source={x:Static properties:Settings.Default}, Path=ActivateOnLock, Mode=TwoWay}" />
+				<ComboBox Grid.Column="1" Grid.Row="0" Margin="5" ItemsSource="{Binding Actions}"
+						  IsEnabled="{Binding Source={x:Static properties:Settings.Default}, Path=ActivateOnLock, Mode=TwoWay}"
+						  SelectedItem="{Binding Source={x:Static properties:Settings.Default}, Path=LockAction, Mode=TwoWay}" />
+
+				<CheckBox Grid.Column="0" Grid.Row="1" Content="Workstation unlock" Margin="5" IsChecked="{Binding Source={x:Static properties:Settings.Default}, Path=ActivateOnUnlock, Mode=TwoWay}" />
+				<ComboBox Grid.Column="1" Grid.Row="1" Margin="5" ItemsSource="{Binding Actions}"
+						  IsEnabled="{Binding Source={x:Static properties:Settings.Default}, Path=ActivateOnUnlock, Mode=TwoWay}"
+						  SelectedItem="{Binding Source={x:Static properties:Settings.Default}, Path=UnlockAction, Mode=TwoWay}" />
+			</Grid>
+		</GroupBox>
+
+		<GroupBox Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1" Header="Remote" VerticalAlignment="Stretch">
+			<Grid>
+				<Grid.RowDefinitions>
+					<RowDefinition Height="Auto" />
+					<RowDefinition Height="Auto" />
+				</Grid.RowDefinitions>
+
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="*" />
+					<ColumnDefinition Width="*" />
+				</Grid.ColumnDefinitions>
+
+				<CheckBox Grid.Column="0" Grid.Row="0" Content="Connect" Margin="5" IsChecked="{Binding Source={x:Static properties:Settings.Default}, Path=ActivateOnRdConnect, Mode=TwoWay}" />
+				<ComboBox Grid.Column="1" Grid.Row="0" Margin="5" ItemsSource="{Binding Actions}"
+						  IsEnabled="{Binding Source={x:Static properties:Settings.Default}, Path=ActivateOnRdConnect, Mode=TwoWay}"
+						  SelectedItem="{Binding Source={x:Static properties:Settings.Default}, Path=RdConnectAction, Mode=TwoWay}" />
+
+				<CheckBox Grid.Column="0" Grid.Row="1" Content="Disconnect" Margin="5" IsChecked="{Binding Source={x:Static properties:Settings.Default}, Path=ActivateOnRdDisconnect, Mode=TwoWay}" />
+				<ComboBox Grid.Column="1" Grid.Row="1" Margin="5" ItemsSource="{Binding Actions}"
+						  IsEnabled="{Binding Source={x:Static properties:Settings.Default}, Path=ActivateOnRdDisconnect, Mode=TwoWay}"
+						  SelectedItem="{Binding Source={x:Static properties:Settings.Default}, Path=RdDisconnectAction, Mode=TwoWay}" />
+			</Grid>
+		</GroupBox>
+		
+		<StackPanel Grid.Column="1" Grid.Row="2" Orientation="Horizontal" VerticalAlignment="Stretch">
+			<Button Content="OK" Margin="6" Width="60" Height="22" Command="" />
+			<Button Content="Cancel" Margin="6" Width="60" Height="22" Command="" />
+		</StackPanel>
+	</Grid>
+</Window>

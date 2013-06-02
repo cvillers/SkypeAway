@@ -34,10 +34,18 @@ namespace SkypeAway.Native
 		}
 
 		[DllImport("user32.dll", SetLastError = true)]
-		public static extern IntPtr FindWindow(string className, string windowTitle);
+		public static extern IntPtr FindWindow(
+			[MarshalAs(UnmanagedType.LPTStr)] 
+			string className, 
+			[MarshalAs(UnmanagedType.LPTStr)] 
+			string windowTitle);
 
 		[DllImport("user32.dll", SetLastError = true)]
-		public static extern IntPtr FindWindowEx(IntPtr parentHandle, IntPtr childAfter, string className, string windowTitle);
+		public static extern IntPtr FindWindowEx(IntPtr parentHandle, IntPtr childAfter, 
+			[MarshalAs(UnmanagedType.LPTStr)] 
+			string className, 
+			[MarshalAs(UnmanagedType.LPTStr)] 
+			string windowTitle);
 
 		// TODO is IntPtr the right size?
 		[return: MarshalAs(UnmanagedType.Bool)]

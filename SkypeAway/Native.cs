@@ -33,14 +33,14 @@ namespace SkypeAway.Native
 			return (IntPtr)((wLow << 16) | (wHigh & 0xffff));
 		}
 
-		[DllImport("user32.dll", SetLastError = true)]
+		[DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Auto)]
 		public static extern IntPtr FindWindow(
 			[MarshalAs(UnmanagedType.LPTStr)] 
 			string className, 
 			[MarshalAs(UnmanagedType.LPTStr)] 
 			string windowTitle);
 
-		[DllImport("user32.dll", SetLastError = true)]
+		[DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Auto)]
 		public static extern IntPtr FindWindowEx(IntPtr parentHandle, IntPtr childAfter, 
 			[MarshalAs(UnmanagedType.LPTStr)] 
 			string className, 
